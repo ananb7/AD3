@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<header>
+   
+</header>
+
+<h1>Detalle del evento seleccionado</h1>
+
+<div th:if="${evento != null}" id="uno">
+    <p>Nombre: <span class="nombre" th:text="${evento.nombre}"></span></p>
+    <p>Descripcion: <span class="nombre" th:text="${evento.descripcion}"></span></p>
+    <p>Direccion: <span class="nombre" th:text="${evento.direccion}"></span></p>
+    <p>Fecha de inicio: <span class="nombre" th:text="${evento.fechaInicio}"></span></p>
+    <p>Duracion: <span class="nombre" th:text="${evento.duracion}"></span></p>
+    <p>Aforo máximo: <span class="nombre" th:text="${evento.aforoMaximo}"></span></p>
+    <p>Mínimo de asistentes: <span class="nombre" th:text="${evento.minimoAsistencia}"></span></p>
+    <p>Precio: <span class="nombre" th:text="${evento.precio}"></span></p>
+</div>
+
+
+<div>
+
+<p>Quedan: <span class="nombre" th:text="${evento.aforoMaximo}"></span></p>
+
+<h2>Reservar Entradas</h2>
+    <form th:action="@{/reservar/{idEvento}}" method="post">
+        <label for="cantidad">Cantidad:</label>
+        <select id="cantidad" name="cantidad">
+            <option th:each="cantidad : ${cantidades}" th:value="${cantidad}" th:text="${cantidad}"></option>
+        </select>
+        <button type="submit">Reservar</button>
+    </form>
+
+</div>
+
+
+
+
+
+
+<!-- Si el evento no existe, muestra el mensaje de error -->
+<div th:if="${evento == null}">
+    <p th:text="${ms}"></p>
+</div>
+
+<a th:href="@{/}">Volver</a>
+
+</body>
+</html>
